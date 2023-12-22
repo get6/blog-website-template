@@ -26,7 +26,7 @@ const Post = ({ params }: { params: { slug: string } }) => {
         <h1 className="text-3xl font-bold">{post.title}</h1>
       </div>
       <div
-        className="[&>*:last-child]:mb-0 [&>*]:mb-3"
+        className="prose"
         dangerouslySetInnerHTML={{ __html: post.body.html }}
       />
     </article>

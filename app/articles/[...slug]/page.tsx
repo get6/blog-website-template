@@ -33,7 +33,7 @@ const Article = ({ params }: { params: { slug: string[] } }) => {
         <h1 className="text-3xl font-bold">{article.title}</h1>
       </div>
       <div
-        className="[&>*:last-child]:mb-0 [&>*]:mb-3"
+        className="prose [&>*:last-child]:mb-0 [&>*]:mb-3"
         dangerouslySetInnerHTML={{ __html: article.body.html }}
       />
     </article>

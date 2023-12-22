@@ -1,3 +1,4 @@
+import Title from '@/app/ui/Title'
 import { Article, allArticles } from 'contentlayer/generated'
 import { compareDesc, format, parseISO } from 'date-fns'
 import Link from 'next/link'
@@ -19,10 +20,7 @@ function ArticleCard(article: Article) {
       >
         {format(parseISO(article.date), 'LLLL d, yyyy')}
       </time>
-      <div
-        className="text-sm [&>*:last-child]:mb-0 [&>*]:mb-3"
-        dangerouslySetInnerHTML={{ __html: article.body.html }}
-      />
+      <div className="truncate text-sm">{article.body.raw}</div>
     </div>
   )
 }
@@ -35,9 +33,7 @@ export default function Article() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="mx-auto max-w-xl py-8">
-        <h1 className="mb-8 text-center text-2xl font-black">
-          Next.js + Contentlayer Example
-        </h1>
+        <Title />
         {articles.map((article, idx) => (
           <ArticleCard key={idx} {...article} />
         ))}
