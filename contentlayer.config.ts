@@ -12,6 +12,10 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       resolve: (post) => `/${post._raw.flattenedPath}`,
     },
+    slug: {
+      type: 'string',
+      resolve: (post) => post._raw.flattenedPath.replace(/^posts\//, ''),
+    },
   },
 }))
 
@@ -26,6 +30,11 @@ export const Article = defineDocumentType(() => ({
     url: {
       type: 'string',
       resolve: (article) => `/${article._raw.flattenedPath}`,
+    },
+    slug: {
+      type: 'string',
+      resolve: (article) =>
+        article._raw.flattenedPath.replace(/^articles\//, ''),
     },
   },
 }))

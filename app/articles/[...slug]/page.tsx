@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns'
 
 export const generateStaticParams = async () =>
   allArticles.map((article) => ({
-    slug: article._raw.flattenedPath.split('/'),
+    slug: article.slug.split('/'),
   }))
 
 export const generateMetadata = ({
@@ -11,22 +11,18 @@ export const generateMetadata = ({
 }: {
   params: { slug: string[] }
 }) => {
-  const article = allArticles.find(
-    (article) =>
-      article._raw.flattenedPath === `articles/${params.slug.join('/')}`,
-  )
+  const { slug } = params
+  const article = allArticles.find((article) => article.slug === slug.join('/'))
 
-  if (!article) throw new Error(`Article not found for slug: ${params.slug}`)
+  if (!article) throw new Error(`Article not found for slug: ${slug}`)
   return { title: article.title }
 }
 
-const ArticleLayout = ({ params }: { params: { slug: string[] } }) => {
-  const article = allArticles.find(
-    (article) =>
-      article._raw.flattenedPath === `articles/${params.slug.join('/')}`,
-  )
+const Article = ({ params }: { params: { slug: string[] } }) => {
+  const { slug } = params
+  const article = allArticles.find((article) => article.slug === slug.join('/'))
 
-  if (!article) throw new Error(`Article not found for slug: ${params.slug}`)
+  if (!article) throw new Error(`Article not found for slug: ${slug}`)
 
   return (
     <article className="mx-auto min-h-screen max-w-xl py-8">
@@ -44,4 +40,4 @@ const ArticleLayout = ({ params }: { params: { slug: string[] } }) => {
   )
 }
 
-export default ArticleLayout
+export default Article
